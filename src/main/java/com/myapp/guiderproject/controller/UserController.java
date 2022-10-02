@@ -1,7 +1,7 @@
-package com.myapp.petcareproject.controller;
+package com.myapp.guiderproject.controller;
 
-import com.myapp.petcareproject.Entity.User;
-import com.myapp.petcareproject.service.UserService;
+import com.myapp.guiderproject.entity.User;
+import com.myapp.guiderproject.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,8 +17,8 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public void getUserById(@PathVariable Long id) {
-        //TODO realization
+    public User getUserById(@PathVariable Long id) {
+        return userService.getUserById(id);
     }
 
     @GetMapping

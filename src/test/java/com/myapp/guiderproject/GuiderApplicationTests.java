@@ -1,10 +1,10 @@
-package com.myapp.petcareproject;
+package com.myapp.guiderproject;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class PetCareProjectApplicationTests {
+class GuiderApplicationTests {
 
     @Test
     void contextLoads() {

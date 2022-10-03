@@ -4,6 +4,7 @@ import com.myapp.guiderproject.dao.UserDao;
 import com.myapp.guiderproject.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import javax.transaction.Transactional;
 
 @Service
 public class UserService {
@@ -19,19 +20,23 @@ public class UserService {
         return userDao.findUserById(id);
     }
 
-    public void getUserByUsername() {
-        //TODO realization
+    public User getUserByUsername(String username) {
+        return userDao.findUserByUsername(username);
     }
 
-    public void addUser() {
-        //TODO realization
+    public void addUser(User user) {
+        userDao.save(user);
     }
 
-    public void deleteUser() {
-        //TODO realization
+    public void deleteUser(Long id) {
+        userDao.deleteById(id);
     }
 
-    public void updateUser() {
-        //TODO realization
+    @Transactional
+    public void updateUser(User user) {
+        User userFromRepository = userDao.findUserById(user.getId());
+        userFromRepository.setPublications(user.getPublications());
+        userFromRepository.setRating(user.getRating());
+        userFromRepository.setUsername(user.getUsername());
     }
 }

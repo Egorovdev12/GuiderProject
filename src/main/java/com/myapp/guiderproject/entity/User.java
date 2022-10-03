@@ -1,6 +1,5 @@
 package com.myapp.guiderproject.entity;
 
-
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -54,6 +53,10 @@ public class User {
 
     public void setPublications(int publications) {
         this.publications = publications;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     @Override

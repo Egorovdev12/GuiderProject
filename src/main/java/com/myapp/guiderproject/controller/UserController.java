@@ -22,22 +22,22 @@ public class UserController {
     }
 
     @GetMapping
-    public void getUserByUsername(@RequestParam String username) {
-        //TODO realization
+    public User getUserByUsername(@RequestParam String username) {
+        return userService.getUserByUsername(username);
     }
 
-    @PostMapping("/add")
+    @PostMapping
     public void addUser(@RequestBody User user) {
-        //TODO realization
+        userService.addUser(user);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping
     public void deleteUser(@PathVariable Long id) {
-        //TODO realization
+        userService.deleteUser(id);
     }
 
-    @PutMapping("/update")
+    @PutMapping
     public void updateUser(@RequestBody User user) {
-        //TODO realization
+        userService.updateUser(user);
     }
 }

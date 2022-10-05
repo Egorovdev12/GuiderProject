@@ -43,14 +43,14 @@ public class UserServiceForAdmin {
         Optional<User> userFromRepositoryById = userDao.findUserById(user.getId());
         Optional<User> userFromRepositoryByName = userDao.findUserByUsername(user.getUsername());
         if (userFromRepositoryById.isEmpty() && userFromRepositoryByName.isEmpty()) {
-            return new ResponseEntity<>(userDao.save(user), HttpStatus.ACCEPTED);
+            return new ResponseEntity<>(userDao.save(user), HttpStatus.CREATED);
         }
         else if (userFromRepositoryById.isPresent()) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
             //TODO add exception throw
         }
         else if (userFromRepositoryByName.isPresent()) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
             //TODO add exception throw
         }
         else {
@@ -61,7 +61,7 @@ public class UserServiceForAdmin {
     public ResponseEntity<User> deleteUser(Long id) {
         Optional<User> userFromRepository = userDao.findUserById(id);
         if (userFromRepository.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         else {
             userDao.deleteById(id);
@@ -71,6 +71,18 @@ public class UserServiceForAdmin {
 
     @Transactional
     public ResponseEntity<User> updateUser(User user) {
+        // check id !=null
+        if (user.getId().equals(null)) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        // check name!=""
+        if (user.getUsername().equals("")) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        // check no such name
+        if (userDao.existsUserByUsername(user.getUsername())) {
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
         Optional<User> userFromRepository = userDao.findUserById(user.getId());
         if (userFromRepository.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);

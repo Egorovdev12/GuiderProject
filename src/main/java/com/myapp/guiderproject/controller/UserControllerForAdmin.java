@@ -39,10 +39,8 @@ public class UserControllerForAdmin {
 
     @PutMapping
     public ResponseEntity<User> updateUser(@RequestBody User user) {
-        //TODO понять что будет, если передать юзера без id
-        //TODO обработать ситуацию, при которой мы меняем никнейм на уже существующий
-        //TODO разобраться с sequence_generator
         //TODO dont repeat yourself в сервисе
+        //TODO exceptions
         return userServiceForAdmin.updateUser(user);
     }
 }

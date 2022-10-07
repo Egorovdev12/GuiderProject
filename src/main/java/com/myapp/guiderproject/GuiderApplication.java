@@ -10,3 +10,8 @@ public class GuiderApplication {
         SpringApplication.run(GuiderApplication.class, args);
     }
 }
+
+
+//TODO EXCEPTIONS причём желательно Advice - доделать на put и delete, сделать так, чтобы возвращася JSON вместо String
+//TODO и понять почему message не прходит из сервиса
+//TODO Валидация

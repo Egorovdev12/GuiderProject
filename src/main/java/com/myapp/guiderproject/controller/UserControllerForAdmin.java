@@ -39,8 +39,6 @@ public class UserControllerForAdmin {
 
     @PutMapping
     public ResponseEntity<User> updateUser(@RequestBody User user) {
-        //TODO dont repeat yourself в сервисе
-        //TODO exceptions
         return userServiceForAdmin.updateUser(user);
     }
 }

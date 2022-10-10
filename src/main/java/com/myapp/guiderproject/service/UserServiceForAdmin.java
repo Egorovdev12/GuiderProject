@@ -2,9 +2,9 @@ package com.myapp.guiderproject.service;
 
 import com.myapp.guiderproject.dao.UserDao;
 import com.myapp.guiderproject.entity.User;
+import com.myapp.guiderproject.exception.IncorrectRequestException;
 import com.myapp.guiderproject.exception.UserAlreadyExistsException;
 import com.myapp.guiderproject.exception.UserNotFoundException;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,7 +42,7 @@ public class UserServiceForAdmin {
         return checkUserIsEmpty();
     }
 
-    public ResponseEntity<User> addUser(@NotNull User user) {
+    public ResponseEntity<User> addUser(User user) {
         Optional<User> userFromRepositoryById = userDao.findUserById(user.getId());
         Optional<User> userFromRepositoryByName = userDao.findUserByUsername(user.getUsername());
         if (userFromRepositoryById.isEmpty() && userFromRepositoryByName.isEmpty()) {
@@ -62,7 +62,7 @@ public class UserServiceForAdmin {
     public ResponseEntity<User> deleteUser(Long id) {
         userFromRepository = userDao.findUserById(id);
         if (userFromRepository.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            throw new UserNotFoundException("Cannot find user with id = " + id);
         }
         else {
             userDao.deleteById(id);
@@ -71,22 +71,23 @@ public class UserServiceForAdmin {
     }
 
     @Transactional
-    public ResponseEntity<User> updateUser(@NotNull User user) {
+    public ResponseEntity<User> updateUser(User user) {
         // check id !=null
-        if (user.getId().equals(null)) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        if (user.getId() == null) {
+            throw new IncorrectRequestException("Field id cannot be null");
         }
         // check name!=""
         if (user.getUsername().equals("")) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            throw new IncorrectRequestException("Field username cannot be empty");
         }
-        // check no such name
-        if (userDao.existsUserByUsername(user.getUsername())) {
-            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        // check no such name in other notes
+        if (userDao.existsUserByUsername(user.getUsername()) &&
+                !userDao.findUserById(user.getId()).equals(userDao.findUserByUsername(user.getUsername()))) {
+            throw new UserAlreadyExistsException("User with same name already exists");
         }
         userFromRepository = userDao.findUserById(user.getId());
         if (userFromRepository.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            throw new UserNotFoundException("There is no user with id = " + user.getId());
         }
         else {
             userFromRepository.get().setPublications(user.getPublications());

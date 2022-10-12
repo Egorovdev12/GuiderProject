@@ -1,13 +1,12 @@
-package com.myapp.petcareproject;
+package com.myapp.guiderproject;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class PetCareProjectApplication {
+public class GuiderApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(PetCareProjectApplication.class, args);
+        SpringApplication.run(GuiderApplication.class, args);
     }
-
 }

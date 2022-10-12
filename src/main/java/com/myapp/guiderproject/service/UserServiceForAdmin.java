@@ -43,6 +43,9 @@ public class UserServiceForAdmin {
     }
 
     public ResponseEntity<User> addUser(User user) {
+        if (user.getUsername().equals("") || user.getUsername() == null) {
+            throw new IncorrectRequestException("Field username cannot be empty");
+        }
         Optional<User> userFromRepositoryById = userDao.findUserById(user.getId());
         Optional<User> userFromRepositoryByName = userDao.findUserByUsername(user.getUsername());
         if (userFromRepositoryById.isEmpty() && userFromRepositoryByName.isEmpty()) {

@@ -10,6 +10,3 @@ public class GuiderApplication {
         SpringApplication.run(GuiderApplication.class, args);
     }
 }
-
-//TODO Валидация
-//TODO Финальные тесты сервиса перед заливом в dev

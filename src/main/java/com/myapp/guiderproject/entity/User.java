@@ -7,13 +7,9 @@ import java.util.Objects;
 @Table(name = "users")
 public class User {
 
+    // GenerationType is very important
     @Id
-    @SequenceGenerator(
-            name = "users_seq_generator",
-            sequenceName = "user_sequence",
-            initialValue = 1, allocationSize = 1
-    )
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "users_seq_generator")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(unique = true, nullable = false)

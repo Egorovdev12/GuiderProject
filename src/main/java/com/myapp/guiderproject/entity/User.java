@@ -9,17 +9,21 @@ public class User {
 
     // GenerationType is very important
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
-    @Column(unique = true, nullable = false)
+    @Column(name = "username", nullable = false, unique = true)
     private String username;
 
-    @Column(nullable = false)
+    @Column(name = "user_rating", nullable = false)
     private double rating;
 
-    @Column(nullable = false)
+    @Column(name = "user_publications", nullable = false)
     private int publications;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @MapsId
+    private UserCredentials userCredentials;
 
     // empty constructor for JPA specification
     public User() {

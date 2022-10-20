@@ -1,5 +1,7 @@
 package com.myapp.guiderproject.entity;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -22,6 +24,7 @@ public class User {
     private int publications;
 
     @OneToOne(fetch = FetchType.LAZY)
+    @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
     @MapsId
     private UserCredentials userCredentials;
 

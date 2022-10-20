@@ -10,3 +10,5 @@ public class GuiderApplication {
         SpringApplication.run(GuiderApplication.class, args);
     }
 }
+
+//TODO улучшить логику через save(entity) в сервисах

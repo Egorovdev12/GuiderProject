@@ -12,7 +12,7 @@ INSERT INTO users (user_publications, user_rating, username, user_credentials_id
 INSERT INTO users (user_publications, user_rating, username,user_credentials_id) VALUES (52, 1299.2, 'Alex322', 4);
 
 --user_personal_info
-INSERT INTO user_personal_info (age, bio, city, name, user_id) VALUES (14, 'I am a Boy', 'Moscow', 'Sergey Malkov', 1);
-INSERT INTO user_personal_info (age, bio, city, name, user_id) VALUES (26, ':)', 'Saint-P', 'Gleb Vasnetsov', 2);
-INSERT INTO user_personal_info (age, bio, city, name, user_id) VALUES (33, 'This is my blog about MTB', 'Moscow', 'Ivan Kunaev', 3);
-INSERT INTO user_personal_info (age, bio, city, name, user_id) VALUES (37, 'New Russian Pirate', 'Pskov', 'Alexander Pistoletov', 4);
+INSERT INTO user_personal_info (age, bio, city, name, user_user_credentials_id) VALUES (14, 'I am a Boy', 'Moscow', 'Sergey Malkov', 1);
+INSERT INTO user_personal_info (age, bio, city, name, user_user_credentials_id) VALUES (26, ':)', 'Saint-P', 'Gleb Vasnetsov', 2);
+INSERT INTO user_personal_info (age, bio, city, name, user_user_credentials_id) VALUES (33, 'This is my blog about MTB', 'Moscow', 'Ivan Kunaev', 3);
+INSERT INTO user_personal_info (age, bio, city, name, user_user_credentials_id) VALUES (37, 'New Russian Pirate', 'Pskov', 'Alexander Pistoletov', 4);
